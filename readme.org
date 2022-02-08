@@ -1,0 +1,13 @@
+#+TITLE: DnD Mode
+
+* Description
+  This is a minor mode for emacs that allows for the easy management of campaigns and characters for DnD.
+
+* Screen Captures
+** Character Sheet
+   [[resources/characater_sheet.gif]]
+   
+** Search SRD
+   [[resources/search_srd.gif]]
+
+   
