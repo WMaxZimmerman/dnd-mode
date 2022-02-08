@@ -8,7 +8,7 @@
 (require 'org-ql)
 
 ;; === Variables ===
-(setq dnd-srd-dir "~/Dropbox/org-srd/")
+(setq dnd-srd-dir "~/Dropbox/org-dnd-srd/")
 (setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
                                    ,(concat "* TODO %?\n"
                                             "/Entered on/ %U"))
