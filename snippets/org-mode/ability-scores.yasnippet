@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Ability Scores
+# key: ability-scores
+# --
+   | Ability | Score | Mod |
+   |---------+-------+-----|
+   | STR     |    10 |   0 |
+   | DEX     |    10 |   0 |
+   | CON     |    10 |   0 |
+   | INT     |    10 |   0 |
+   | WIS     |    10 |   0 |
+   | CHA     |    10 |   0 |
+  #+TBLFM: \$3='(calc-dnd-mod (string-to-number \$2))

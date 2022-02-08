@@ -9,5 +9,3 @@
    
 ** Search SRD
    [[resources/search_srd.gif]]
-
-   

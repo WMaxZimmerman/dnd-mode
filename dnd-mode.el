@@ -5,21 +5,36 @@
 ;;; Code:
 (require 'yasnippet)
 (require 'org)
+(require 'org-ql)
+
+;; === Variables ===
+(setq dnd-srd-dir "~/Dropbox/org-srd/")
+(setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
+                                   ,(concat "* TODO %?\n"
+                                            "/Entered on/ %U"))
+                                  ("n" "Note" entry  (file "notes.org")
+                                   ,(concat "* %?\n"
+                                            "/Entered on/ %U"))))
+
+(setq dnd-prev-org-capture-templates nil)
+(setq dnd-prev-org-directory nil)
+(setq dnd-prev-org-agenda-files nil)
+(setq dnd-prev-yasnippets-directory nil)
+
+
+;; === Functions ===
+(defun dnd-load-srd-agenda ()
+  "Loads the SRD files into the org agenda"
+  (setq org-agenda-files (read-lines (concat dnd-srd-dir ".agenda-index"))))
 
 (defun dnd-select-session-target ()
   "Set the org capture to a sub directory in dnd"
   (interactive)
   (setq dir (read-directory-name "dir:"))
-  (progn (setq org-agenda-files (read-lines "~/Dropbox/dnd/.agenda-index"))
+  (progn (dnd-load-srd-agenda)
          (setq org-agenda-files (append org-agenda-files (read-lines (concat dir ".agenda-index"))))
          (setq org-directory (concat dir "org/"))
-         (setq org-capture-templates
-               `(("i" "Inbox" entry  (file "inbox.org")
-                  ,(concat "* TODO %?\n"
-                           "/Entered on/ %U"))
-                 ("n" "Note" entry  (file "notes.org")
-                  ,(concat "* %?\n"
-                           "/Entered on/ %U"))))))
+         (setq org-capture-templates dnd-org-capture-templates)))
 
 
 (defun rtd ()
@@ -52,27 +67,11 @@
   (message "You rolled %d" dnd-total))
 
 
-;; yas
-(yas-global-mode 1)
-(setq yas-snippet-dirs (append yas-snippet-dirs
-                               '("~/.emacs.d/snippets")))
-(yas-reload-all)
-
-
-(define-minor-mode dnd-mode
-  "Manage and interact with character sheets"
-  :lighter " dnd"
-  :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c r") 'rtd)
-            (define-key map (kbd "C-c e") 'dnd-eval-charsheet)
-            map))
-
-;; funcs
-
 (defun calc-dnd-mod (score)
   "Calculates the modifier of a DND ability score"
   (message "input is: %d" score)
   (floor (- (/ score 2) 5)))
+
 
 (defun calc-dnd-pb (pb check)
   "Calculates the Proficiency Bonus to use based on the check and value provided"
@@ -81,6 +80,7 @@
     (if (string= check "XX")
       (* 2 number-pb)
       0)))
+
 
 (defun dnd-output-ability-constants (table)
   "Outputs constants for the Ability Modifiers"
@@ -92,6 +92,7 @@
           (setq consts (cdr consts))
         (progn (princ (car consts))
                (setq consts (cdr consts)))))))
+
 
 (defun calc-dnd-point-buy-cost (score)
   "Calculates the modifier of a DND ability score"
@@ -107,6 +108,7 @@
     (if (< cost 0)
         "Value Too Low"
       cost)))
+
 
 (defun dnd-eval-charsheet ()
   "Evaluates the dnd character sheet that you are currently in"
@@ -138,8 +140,28 @@
       (outline-hide-leaves)
       (goto-char starting-point))))
 
+
+;; ==== Minor Mode ===
+(define-minor-mode dnd-mode
+  "Toggles global dnd-mode"
+  nil
+  :global t
+  :lighter " dnd"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c r") 'rtd)
+            (define-key map (kbd "C-c e") 'dnd-eval-charsheet)
+            (define-key map (kbd "C-c s") 'dnd-select-session-target)
+            map)
   
+  (if dnd-mode
+      (message "dnd-mode activated!")
+    (message "dnd-mode deactivated!")))
+
+(add-hook 'dnd-mode-hook (lambda () (message "Dnd Mode did thing")))
+
+(add-hook 'dnd-mode-on-hook (lambda () (message "Dnd Mode is On")))
+
+(add-hook 'dnd-mode-off-hook (lambda () (message "Dnd Mode is Off")))
 
 (provide 'dnd)
-
 ;;; dnd.el ends here

@@ -1,0 +1,131 @@
+# -*- mode: snippet -*-
+# name: charsheet
+# key: charsheet
+# --
+#+TILE: <character-name> - Stats
+
+* Constants
+  #+NAME: define-constants-with-src-block
+  #+BEGIN_SRC elisp :var table=stats :colnames yes :results output drawer :cache yes :lang elisp
+    (dnd-output-ability-constants table)
+    #+END_SRC
+
+    #+RESULTS[b37720658e95c7760262b0de3f89421263d677ac]: define-constants-with-src-block
+    :results:
+    #+CONSTANTS: STR=8
+    #+CONSTANTS: DEX=8
+    #+CONSTANTS: CON=8
+    #+CONSTANTS: INT=8
+    #+CONSTANTS: WIS=8
+    #+CONSTANTS: CHA=8
+    #+CONSTANTS: PROF=2
+    :end:
+  
+* Traits
+  | Level | Race   | Subrace | Class   | Subclass | Age | Alignment | Size |
+  |-------+--------+---------+---------+----------+-----+-----------+------|
+  |     1 | <race> |         | <class> |          |     |           |      |
+
+* Stats  
+  | Walking Speed | Climbing Speed | Hit Points | AC | Death Saves | Inspiration |
+  |---------------+----------------+------------+----+-------------+-------------|
+  |               |                |            |    |             |             |
+
+* Point Buy
+  * Ability Scores
+  #+name: ability-scores
+   | Ability | Score |  Mod | Point Buy |
+   |---------+-------+------+-----------|
+   | STR     |     8 |   -1 |         0 |
+   | DEX     |     8 |   -1 |         0 |
+   | CON     |     8 |   -1 |         0 |
+   | INT     |     8 |   -1 |         0 |
+   | WIS     |     8 |   -1 |         0 |
+   | CHA     |     8 |   -1 |         0 |
+   |---------+-------+------+-----------|
+   | Allowed |    27 | Cost |         0 |
+  #+TBLFM: @2\$3..@7\$3='(calc-dnd-mod (string-to-number \$2))
+  #+TBLFM: @2\$4..@7\$4='(calc-dnd-point-buy-cost \$2)
+  #+TBLFM: @8\$4=vsum(@2\$4..@7\$4)
+  
+* Abilities and Skills
+  #+name: stats
+  | Ability | Score | Mod | PB | Roll      | Skill           |
+  |---------+-------+-----+----+-----------+-----------------|
+  | STR     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Athletics       |
+  |---------+-------+-----+----+-----------+-----------------|
+  | DEX     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Acrobatics      |
+  |         |       |     |    | 1d20 + -1 | Sleight of Hand |
+  |         |       |     |    | 1d20 + -1 | Stealth         |
+  |---------+-------+-----+----+-----------+-----------------|
+  | CON     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |---------+-------+-----+----+-----------+-----------------|
+  | INT     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Arcana          |
+  |         |       |     |    | 1d20 + -1 | History         |
+  |         |       |     |    | 1d20 + -1 | Investigation   |
+  |         |       |     |    | 1d20 + -1 | Nature          |
+  |         |       |     |    | 1d20 + -1 | Religion        |
+  |---------+-------+-----+----+-----------+-----------------|
+  | WIS     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Animal Handling |
+  |         |       |     |    | 1d20 + -1 | Insight         |
+  |         |       |     |    | 1d20 + -1 | Medicine        |
+  |         |       |     |    | 1d20 + -1 | Perception      |
+  |         |       |     |    | 1d20 + -1 | Survival        |
+  |---------+-------+-----+----+-----------+-----------------|
+  | CHA     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Deception       |
+  |         |       |     |    | 1d20 + -1 | Intimidation    |
+  |         |       |     |    | 1d20 + -1 | Performance     |
+  |         |       |     |    | 1d20 + -1 | Persuasion      |
+  |---------+-------+-----+----+-----------+-----------------|
+  | PROF    |     2 |     |    |           |                 |
+  #+TBLFM: @2\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @4\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @8\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @9\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @15\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @21\$3='(calc-dnd-mod (string-to-number (org-table-get-constant \$1)))
+  #+TBLFM: @2\$5..@3\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @2\$1))))))
+  #+TBLFM: @4\$5..@7\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @4\$1))))))
+  #+TBLFM: @8\$5..@8\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @8\$1))))))
+  #+TBLFM: @9\$5..@14\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @9\$1))))))
+  #+TBLFM: @15\$5..@20\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @15\$1))))))
+  #+TBLFM: @21\$5..@25\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb \$PROF \$4) (calc-dnd-mod (string-to-number (org-table-get-constant @21\$1))))))
+  
+  
+* Attacks
+  #+NAME: attacks
+  | Weapon  | Ability | PB | Type     | Die | Mod To Hit | Roll     |
+  |---------+---------+----+----------+-----+------------+----------|
+  | Longbow | DEX     |    | Piercing | 1d8 |         -1 | 1d8 + -1 |
+  #+TBLFM: \$6='(+ (calc-dnd-pb \$PROF \$3) (calc-dnd-mod (string-to-number (org-table-get-constant \$2))))
+  #+TBLFM: \$7='(concat \$5 " + " (number-to-string (calc-dnd-mod (string-to-number (org-table-get-constant \$2)))))
+
+* Proficiencies
+  | Languages | Tools          | Armor   | Weapons |
+  |-----------+----------------+---------+---------|
+  | Common    | Thieves' Tools | Light   | Simple  |
+  | Grung     | Flute          | Medium  | Martial |
+  |           |                | Shields |         |
+
+* Equipment
+  | Name           | Quantity | Cost (gp) | Weight (lbs) | Total Weight (lbs) | Total Cost (gp) |
+  |----------------+----------+-----------+--------------+--------------------+-----------------|
+  | Longbow        |        1 |        50 |            2 |                  2 |              50 |
+  |----------------+----------+-----------+--------------+--------------------+-----------------|
+  | Carry Capacity |       80 |           |              |                  0 |               0 |
+  #+TBLFM: \$5=(\$2 * \$4)
+  #+TBLFM: \$6=(\$2 * \$3)
+  #+TBLFM: @>$5=vsum(@<<\$5..@>>\$5)
+  #+TBLFM: @>$6=vsum(@<<\$6..@>>\$6)
+  #+TBLFM: @>\$2=(\$STR * 10)
+  
+** Money
+   | Copper | Silver | Electrum | Gold | Platinum | Total (Gold) |
+   |--------+--------+----------+------+----------+--------------|
+   |      0 |      0 |        0 |   20 |        0 |           20 |
+   #+TBLFM: \$6=((\$1 / 100) + (\$2 / 10) + (\$3 / 2) + \$4 + (\$5 * 10))
