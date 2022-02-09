@@ -16,11 +16,6 @@
                                    ,(concat "* %?\n"
                                             "/Entered on/ %U"))))
 
-(setq dnd-prev-org-capture-templates nil)
-(setq dnd-prev-org-directory nil)
-(setq dnd-prev-org-agenda-files nil)
-(setq dnd-prev-yasnippets-directory nil)
-
 
 ;; === Functions ===
 (defun dnd-load-srd-agenda ()
@@ -159,9 +154,26 @@
 
 (add-hook 'dnd-mode-hook (lambda () (message "Dnd Mode did thing")))
 
-(add-hook 'dnd-mode-on-hook (lambda () (message "Dnd Mode is On")))
+(add-hook 'dnd-mode-on-hook (lambda () (progn
+                                            (setq dnd-prev-org-capture-templates org-capture-templates)
+                                            (setq dnd-prev-org-directory org-directory)
+                                            (setq dnd-prev-org-agenda-files org-agenda-files)
+                                            (setq dnd-prev-yas-snippet-dirs yas-snippet-dirs)
 
-(add-hook 'dnd-mode-off-hook (lambda () (message "Dnd Mode is Off")))
+                                            (dnd-load-srd-agenda)
+                                            (setq yas-snippet-dirs (append yas-snippet-dirs
+                                                                           '("~/Dropbox/dnd-mode/snippets")))
+                                            (yas-reload-all)
+                                            (message "Dnd Mode is On!"))))
+
+(add-hook 'dnd-mode-off-hook (lambda () (progn 
+                                            (setq org-capture-templates dnd-prev-org-capture-templates)
+                                            (setq org-directory dnd-prev-org-directory)
+                                            (setq org-agenda-files dnd-prev-org-agenda-files)
+                                            (setq yas-snippet-dirs dnd-prev-yas-snippet-dirs)
+                                            (yas-reload-all)
+
+                                            (message "Dnd Mode is Off!"))))
 
 (provide 'dnd)
 ;;; dnd.el ends here
