@@ -1,0 +1,9 @@
+#+TILE: Ribbet Downey Jr. - Background
+
+* Description
+  This is a file to store background information for your character. In this example, this file is also included in the
+  =.agenda-index= file so that I can quickly search for things that may be defined in my background if needed.
+
+* Troubled Past
+** Something that may come up in the campaign                       :nemesis:
+   a way to quickly reference information about my characters nemesis.

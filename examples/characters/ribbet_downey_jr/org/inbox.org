@@ -1,0 +1,5 @@
+#+STARTUP: content showstars indent
+#+FILETAGS: dnd inbox ribbet_downey_jr
+
+* TODO Let people know that this is a place they can capture todos for their character
+/Entered on/ [2022-02-10 Thu 08:49]

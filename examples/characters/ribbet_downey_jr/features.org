@@ -1,0 +1,66 @@
+#+TILE: Ribbet Downey Jr. - Features
+#+STARTUP: content showstars indent
+#+FILETAGS: dnd features ribbet_downey_jr
+
+* Racial (Grung)
+  - Amphibious ::
+    You can breathe air and water
+    
+  - Poison Immunity ::
+    You are immune to poison damage and the poisoned condition
+    
+  - Poison Skin ::
+    Any creature that grapples you or otherwise comes into direct contact with your skin must succeed on a DC 12
+    Constitution saving throw or become poisoned for 1 minute. A poisoned creature no longer in direct contact with you
+    can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+    
+    - You can also apply this poison to any piercing weapon as part of an attack with that weapon, though when you hit
+      the poison reacts differently. The target must succeed on a DC 12 Constitution saving throw or take 2d4 poison damage.
+      
+  - Standing Leap ::
+    Your long jump is up to 25 feet and your high jump is up to 15 feet, with or without a running start.
+    
+  - Water Dependency ::
+    If you fail to immerse yourself in water for at least 1 hour during a day
+    
+* Class (Ranger)
+  - Favored Enemy (Human, Goblin) ::
+    Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain
+    type of enemy.
+
+    Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends,
+    giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as
+    gnolls and orcs) as favored enemies.
+
+    You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to
+    recall information about them.
+
+    When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if
+    they speak one at all.
+
+    You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain
+    levels, your choices should reflect the types of monsters you have encountered on your adventures.
+    
+  - Natural Explorer (Swamp) ::
+    Also at 1st level, you are particularly familiar with one type of natural environment and are adept at traveling
+    and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland,
+    mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain,
+    your proficiency bonus is doubled if you are using a skill that you’re proficient in.
+
+    While traveling for an hour or more in your favored terrain, you gain the following benefits:
+
+    - Difficult terrain doesn’t slow your group’s travel.
+    - Your group can’t become lost except by magical means.
+    - Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.
+    - If you are traveling alone, you can move stealthily at a normal pace.
+    - When you forage, you find twice as much food as you normally would.
+    - While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.
+
+    You choose additional favored terrain types at 6th and 10th level.
+    
+* Background (Urban Bounty Hunter)
+  - Ear to the Ground ::
+    You are in frequent contact with people in the segment of society that your chosen quarries move through. These
+    people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of
+    high society. This connection comes in the form of a contact in any city you visit, a person who provides
+    information about the people and places of the local area.

@@ -1,0 +1,5 @@
+#+TITLE: Character Sheet Manager
+
+* Description
+  Inside of this dnd-mode you can easily manager the information needed for your character. In this directory you can
+  find examples of characters and how they are setup.

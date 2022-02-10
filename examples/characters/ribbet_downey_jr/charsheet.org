@@ -1,0 +1,123 @@
+#+TILE: Ribbet Downey Jr. - Stats
+
+* Constants
+  #+NAME: define-constants-with-src-block
+  #+BEGIN_SRC elisp :var table=stats :colnames yes :results output drawer :cache yes :lang elisp
+    (dnd-output-ability-constants table)
+    #+END_SRC
+
+    #+RESULTS[14aad2f0b7eedd6a031f64b39b8a0e0578a0f577]: define-constants-with-src-block
+    :results:
+    #+CONSTANTS: STR=10
+    #+CONSTANTS: DEX=17
+    #+CONSTANTS: CON=12
+    #+CONSTANTS: INT=11
+    #+CONSTANTS: WIS=15
+    #+CONSTANTS: CHA=9
+    #+CONSTANTS: PROF=2
+    :end:
+  
+* Traits
+  | Level | Race  | Subrace | Class  | Subclass | Age | Alignment    | Size          |
+  |-------+-------+---------+--------+----------+-----+--------------+---------------|
+  |     1 | Grung | Orange  | Ranger |          |  20 | Chaotic Good | Small (2.5ft) |
+
+* Stats  
+  | Walking Speed | Climbing Speed | Hit Points | AC | Death Saves | Inspiration |
+  |---------------+----------------+------------+----+-------------+-------------|
+  |            25 |             25 | 12/12      | 17 |             |             |
+
+* Abilities and Skills
+  #+name: stats
+  | Ability | Score | Mod | PB | Roll      | Skill           |
+  |---------+-------+-----+----+-----------+-----------------|
+  | STR     |    10 |   0 |    | 1d20 + 0  | Saving Throw    |
+  |         |       |     |    | 1d20 + 0  | Athletics       |
+  |---------+-------+-----+----+-----------+-----------------|
+  | DEX     |    17 |   3 |    | 1d20 + 3  | Saving Throw    |
+  |         |       |     |    | 1d20 + 3  | Acrobatics      |
+  |         |       |     |    | 1d20 + 3  | Sleight of Hand |
+  |         |       |     |    | 1d20 + 3  | Stealth         |
+  |---------+-------+-----+----+-----------+-----------------|
+  | CON     |    12 |   1 |    | 1d20 + 1  | Saving Throw    |
+  |---------+-------+-----+----+-----------+-----------------|
+  | INT     |    11 |   0 |    | 1d20 + 0  | Saving Throw    |
+  |         |       |     |    | 1d20 + 0  | Arcana          |
+  |         |       |     |    | 1d20 + 0  | History         |
+  |         |       |     |    | 1d20 + 0  | Investigation   |
+  |         |       |     |    | 1d20 + 0  | Nature          |
+  |         |       |     |    | 1d20 + 0  | Religion        |
+  |---------+-------+-----+----+-----------+-----------------|
+  | WIS     |    15 |   2 |    | 1d20 + 2  | Saving Throw    |
+  |         |       |     |    | 1d20 + 2  | Animal Handling |
+  |         |       |     |    | 1d20 + 2  | Insight         |
+  |         |       |     |    | 1d20 + 2  | Medicine        |
+  |         |       |     |    | 1d20 + 2  | Perception      |
+  |         |       |     |    | 1d20 + 2  | Survival        |
+  |---------+-------+-----+----+-----------+-----------------|
+  | CHA     |     9 |  -1 |    | 1d20 + -1 | Saving Throw    |
+  |         |       |     |    | 1d20 + -1 | Deception       |
+  |         |       |     |    | 1d20 + -1 | Intimidation    |
+  |         |       |     |    | 1d20 + -1 | Performance     |
+  |         |       |     |    | 1d20 + -1 | Persuasion      |
+  |---------+-------+-----+----+-----------+-----------------|
+  | PROF    |     2 |     |    |           |                 |
+  #+TBLFM: @2$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @4$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @8$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @9$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @15$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @21$3='(calc-dnd-mod (string-to-number (org-table-get-constant $1)))
+  #+TBLFM: @2$5..@3$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @2$1))))))
+  #+TBLFM: @4$5..@7$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @4$1))))))
+  #+TBLFM: @8$5..@8$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @8$1))))))
+  #+TBLFM: @9$5..@14$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @9$1))))))
+  #+TBLFM: @15$5..@20$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @15$1))))))
+  #+TBLFM: @21$5..@25$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb $PROF $4) (calc-dnd-mod (string-to-number (org-table-get-constant @21$1))))))
+  
+  
+* Attacks
+  #+NAME: attacks
+  | Weapon     | Ability | PB | Type        | Die | Mod To Hit | Roll    |
+  |------------+---------+----+-------------+-----+------------+---------|
+  | Longbow    | DEX     |    | Piercing    | 1d8 |          3 | 1d8 + 3 |
+  | Shortsword | STR     |    | Piercing    | 1d6 |          0 | 1d6 + 0 |
+  | Shortsword | DEX     |    | Piercing    | 1d6 |          3 | 1d6 + 3 |
+  #+TBLFM: $6='(+ (calc-dnd-pb $PROF $3) (calc-dnd-mod (string-to-number (org-table-get-constant $2))))
+  #+TBLFM: $7='(concat $5 " + " (number-to-string (calc-dnd-mod (string-to-number (org-table-get-constant $2)))))
+
+* Proficiencies
+  | Languages | Tools          | Armor   | Weapons |
+  |-----------+----------------+---------+---------|
+  | Common    | Thieves' Tools | Light   | Simple  |
+  | Grung     | Flute          | Medium  | Martial |
+  |           |                | Shields |         |
+
+* Equipment
+  | Name               | Quantity | Cost (gp) | Weight (lbs) | Total Weight (lbs) | Total Cost (gp) |
+  |--------------------+----------+-----------+--------------+--------------------+-----------------|
+  | Longbow            |        1 |        50 |            2 |                  2 |              50 |
+  | Shortsword         |        1 |        10 |            2 |                  2 |              10 |
+  | Backpack           |        1 |         2 |            5 |                  5 |               2 |
+  | Crowbar            |        1 |         2 |            5 |                  5 |               2 |
+  | Hammer             |        1 |         1 |            3 |                  3 |               1 |
+  | Piton              |       10 |       .05 |          .25 |                2.5 |             0.5 |
+  | Torch              |       10 |       .01 |            1 |                 10 |             0.1 |
+  | Tinderbox          |        1 |        .5 |            1 |                  1 |             0.5 |
+  | Ration             |       10 |        .5 |            2 |                 20 |              5. |
+  | Waterskin          |        1 |        .2 |            5 |                  5 |             0.2 |
+  | Hempen Rope (50ft) |        1 |         1 |           10 |                 10 |               1 |
+  | Fine Clothes       |        1 |        15 |            6 |                  6 |              15 |
+  |--------------------+----------+-----------+--------------+--------------------+-----------------|
+  | Carry Capacity     |      100 |           |              |               71.5 |            87.3 |
+  #+TBLFM: $5=($2 * $4)
+  #+TBLFM: $6=($2 * $3)
+  #+TBLFM: @>$5=vsum(@<<$5..@>>$5)
+  #+TBLFM: @>$6=vsum(@<<$6..@>>$6)
+  #+TBLFM: @>$2=($STR * 10)
+  
+** Money
+   | Copper | Silver | Electrum | Gold | Platinum | Total (Gold) |
+   |--------+--------+----------+------+----------+--------------|
+   |      1 |      1 |        1 |   20 |        1 |        30.61 |
+   #+TBLFM: $6=(($1 / 100) + ($2 / 10) + ($3 / 2) + $4 + ($5 * 10))

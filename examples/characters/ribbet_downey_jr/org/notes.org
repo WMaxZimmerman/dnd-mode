@@ -1,0 +1,5 @@
+#+STARTUP: content showstars indent
+#+FILETAGS: dnd notes ribbet_downey_jr
+
+* The party met a shifty dwarf name Stabby :dwarf:npc:party:stabby:
+/Entered on/ [2022-02-10 Thu 08:50]
