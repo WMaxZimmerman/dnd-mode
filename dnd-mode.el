@@ -8,7 +8,8 @@
 (require 'org-ql)
 
 ;; === Variables ===
-(setq dnd-srd-dir "~/Dropbox/org-dnd-srd/")
+(setq dnd-srd-dir "~/org-dnd-srd/")
+(setq dnd-snippet-dir "~/dnd-mode/snippets")
 (setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
                                    ,(concat "* TODO %?\n"
                                             "/Entered on/ %U"))
@@ -20,14 +21,16 @@
 ;; === Functions ===
 (defun dnd-load-srd-agenda ()
   "Loads the SRD files into the org agenda"
-  (setq org-agenda-files (read-lines (concat dnd-srd-dir ".agenda-index"))))
+  (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
+                                 (read-lines (concat dnd-srd-dir ".agenda-index")))))
 
 (defun dnd-select-session-target ()
   "Set the org capture to a sub directory in dnd"
   (interactive)
   (setq dir (read-directory-name "dir:"))
   (progn (dnd-load-srd-agenda)
-         (setq org-agenda-files (append org-agenda-files (read-lines (concat dir ".agenda-index"))))
+         (setq org-agenda-files (append org-agenda-files (mapcar (lambda (path) (concat dir path))
+                                                                 (read-lines (concat dir ".agenda-index")))))
          (setq org-directory (concat dir "org/"))
          (setq org-capture-templates dnd-org-capture-templates)))
 
