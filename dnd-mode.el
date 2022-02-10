@@ -5,7 +5,6 @@
 ;;; Code:
 (require 'yasnippet)
 (require 'org)
-(require 'org-ql)
 
 ;; === Variables ===
 (setq dnd-srd-dir "~/org-dnd-srd/")
