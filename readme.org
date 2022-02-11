@@ -20,7 +20,29 @@
      
    - rtd ::
      Roll the dice. "Randomly" generated value for given pass ins. EX =1d20 + 1=.
-  
+
+** Customization
+   - dnd-srd-dir ::
+     This variable defines the directory location of the DnD SRD org files. These can be the files that are
+     defined in the [[https://github.com/WMaxZimmerman/org-dnd-srd][org-dnd-srd]] repository, or any org files that you have for SRD files. The important thing
+     to note is that the directory will need to have a =.agenda-index= file that specifies the relative paths
+     (from the directory) to the files that should be added to the org-agenda.
+
+     - Default :: =~/org-dnd-srd=
+
+   - dnd-snippet-dir ::
+     This variable defines the directory location of the yasnippets that should be toggled on when the dnd-mode
+     is toggled on. This repository does have snippets stored with it inside the [[file:snippets/][snippets]] directory.
+
+     - Default :: =~/dnd-mode/snippets=
+
+   - dnd-org-capture-templates ::
+     This variable defines the capture templates that will be used when the dnd-mode is toggled on. This repo
+     comes with some basic templates that can be used, but your campaigns and characters will likely be different
+     and, therefor, may need different templates.
+
+     - Default :: a basic template for inbox TODOs and notes.
+     
 * Screen Captures
 ** Character Sheet
    [[resources/characater_sheet.gif]]
