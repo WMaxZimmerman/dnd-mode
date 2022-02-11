@@ -1,9 +1,22 @@
 #+TITLE: DnD Mode
 
-* Overview
-** Description
-   This is a minor mode for emacs that allows for the easy management of campaigns and characters for DnD.
+* Description
+  This is a minor mode for emacs that allows for the easy management of campaigns and characters for DnD. This mode
+  primarily relies on [[https://orgmode.org/][org-mode]] to be the engine of this mode. For the best use of this mode it is recommended to be
+  familiar with [[https://orgmode.org/manual/Agenda-Commands.html][org-agenda]] and [[https://orgmode.org/manual/Capture.html][org-capture]]. You are able to use this mode without that knowledge, but some of the
+  features will be missed. The charsheet will function with emacs 'out of the box' as org is already there.
 
+* Installation
+  To use this package in your configuration you can copy the [[file:dnd-mode.el][dnd-mode.el]] file or clone this repository. To utilize
+  the SRD files you can copy or clone the files in the [[https://github.com/WMaxZimmerman/org-dnd-srd][org-dnd-srd]] repository. This mode will expect those files
+  to exist and will likely break if you don't at least have the =.agenda-index= file. For more information about
+  where the default of this folder is expected to be or how to customize it see the [[*dnd-srd-dir][customization]] section below.
+
+  This package will also want to utlize a set of [[https://github.com/joaotavora/yasnippet][yasnippets]] that will make editing character sheets and files easier
+  when the mode is toggled on. You will likely want to at least have a valid directory set, but you can choose to not
+  have any snippets in there.
+   
+* Usage
 ** Default Key Strokes - /When mode is on/
    | Shortcut | Function                  |
    |----------+---------------------------|
@@ -21,27 +34,27 @@
    - rtd ::
      Roll the dice. "Randomly" generated value for given pass ins. EX =1d20 + 1=.
 
-** Customization
-   - dnd-srd-dir ::
-     This variable defines the directory location of the DnD SRD org files. These can be the files that are
-     defined in the [[https://github.com/WMaxZimmerman/org-dnd-srd][org-dnd-srd]] repository, or any org files that you have for SRD files. The important thing
-     to note is that the directory will need to have a =.agenda-index= file that specifies the relative paths
-     (from the directory) to the files that should be added to the org-agenda.
+* Customization
+** dnd-srd-dir
+   This variable defines the directory location of the DnD SRD org files. These can be the files that are
+   defined in the [[https://github.com/WMaxZimmerman/org-dnd-srd][org-dnd-srd]] repository, or any org files that you have for SRD files. The important thing
+   to note is that the directory will need to have a =.agenda-index= file that specifies the relative paths
+   (from the directory) to the files that should be added to the org-agenda.
 
-     - Default :: =~/org-dnd-srd=
+   - Default :: =~/org-dnd-srd=
 
-   - dnd-snippet-dir ::
-     This variable defines the directory location of the yasnippets that should be toggled on when the dnd-mode
-     is toggled on. This repository does have snippets stored with it inside the [[file:snippets/][snippets]] directory.
+** dnd-snippet-dir
+   This variable defines the directory location of the yasnippets that should be toggled on when the dnd-mode
+   is toggled on. This repository does have snippets stored with it inside the [[file:snippets/][snippets]] directory.
 
-     - Default :: =~/dnd-mode/snippets=
+   - Default :: =~/dnd-mode/snippets=
 
-   - dnd-org-capture-templates ::
-     This variable defines the capture templates that will be used when the dnd-mode is toggled on. This repo
-     comes with some basic templates that can be used, but your campaigns and characters will likely be different
-     and, therefor, may need different templates.
+** dnd-org-capture-templates
+   This variable defines the capture templates that will be used when the dnd-mode is toggled on. This repo
+   some basic templates that can be used, but your campaigns and characters will likely be different
+   and, therefor, may need different templates.
 
-     - Default :: a basic template for inbox TODOs and notes.
+   - Default :: a basic template for inbox TODOs and notes.
      
 * Screen Captures
 ** Character Sheet
