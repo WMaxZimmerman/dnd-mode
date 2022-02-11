@@ -19,12 +19,12 @@
 
 ;; === Functions ===
 (defun dnd-load-srd-agenda ()
-  "Loads the SRD files into the org agenda"
+  "Loads the DnD SRD files in the directory defined by 'dnd-srd-dir' into the org agenda"
   (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
                                  (read-lines (concat dnd-srd-dir ".agenda-index")))))
 
 (defun dnd-select-session-target ()
-  "Set the org capture to a sub directory in dnd"
+  "Sets the org agenda/capture to a the specified directory"
   (interactive)
   (setq dir (read-directory-name "dir:"))
   (progn (dnd-load-srd-agenda)
@@ -35,7 +35,7 @@
 
 
 (defun rtd ()
-  "Sometimes you just got to roll the dice."
+  "Sometimes you just got to roll the dice. This function currently expects the patter of '1d4 + 0' (the spaces are needed and you must have an add, sorry)"
   (interactive)
 
   (setq dnd-text (buffer-substring (region-beginning) (region-end)))
@@ -65,7 +65,7 @@
 
 
 (defun calc-dnd-mod (score)
-  "Calculates the modifier of a DND ability score"
+  "Calculates the modifier of the given DND ability score"
   (message "input is: %d" score)
   (floor (- (/ score 2) 5)))
 
@@ -92,7 +92,7 @@
 
 
 (defun calc-dnd-point-buy-cost (score)
-  "Calculates the modifier of a DND ability score"
+  "Calculates the point buy value of the given ability score"
   (setq base-cost (- (string-to-number score) 8))
   (setq cost 0)
   (if (> base-cost 5)

@@ -1,12 +1,25 @@
 #+TITLE: DnD Mode
 
-* Description
-  This is a minor mode for emacs that allows for the easy management of campaigns and characters for DnD.
+* Overview
+** Description
+   This is a minor mode for emacs that allows for the easy management of campaigns and characters for DnD.
 
 ** Default Key Strokes - /When mode is on/
-   - dnd-select-session-target - Updates org agenda files and org capture templates.- =C-c s=
-   - dnd-eval-charsheet - Evaluates the dnd character sheet that you are currently in.- =C-c e=
-   - rtd - Roll the dice. "Randomly" generated value for given pass ins. EX =1d20 + 1=. - =C-c r=
+   | Shortcut | Function                  |
+   |----------+---------------------------|
+   | =C-c s=  | dnd-select-session-target |
+   | =C-c e=  | dnd-eval-charsheet        |
+   | =C-c r=  | rtd                       |
+
+** Functions   
+   - dnd-select-session-target ::
+     Updates org agenda files and org capture templates.
+     
+   - dnd-eval-charsheet ::
+     Evaluates the dnd character sheet that you are currently in.
+     
+   - rtd ::
+     Roll the dice. "Randomly" generated value for given pass ins. EX =1d20 + 1=.
   
 * Screen Captures
 ** Character Sheet
