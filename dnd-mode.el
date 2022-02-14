@@ -73,9 +73,9 @@
 (defun calc-dnd-pb (pb check)
   "Calculates the Proficiency Bonus to use based on the check and value provided"
   (if (string= check "X")
-      number-pb
+      pb
     (if (string= check "XX")
-      (* 2 number-pb)
+      (* 2 pb)
       0)))
 
 
