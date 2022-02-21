@@ -2,12 +2,48 @@
 # name: Ability Scores
 # key: ability-scores
 # --
-   | Ability | Score | Mod |
-   |---------+-------+-----|
-   | STR     |    10 |   0 |
-   | DEX     |    10 |   0 |
-   | CON     |    10 |   0 |
-   | INT     |    10 |   0 |
-   | WIS     |    10 |   0 |
-   | CHA     |    10 |   0 |
-  #+TBLFM: \$3='(calc-dnd-mod (string-to-number \$2))
+| Ability | Score | Mod | PB | Roll      | Skill           |
+|---------+-------+-----+----+-----------+-----------------|
+| STR     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+|         |       |     |    | 1d20 + -1 | Athletics       |
+|---------+-------+-----+----+-----------+-----------------|
+| DEX     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+|         |       |     |    | 1d20 + -1 | Acrobatics      |
+|         |       |     |    | 1d20 + -1 | Sleight of Hand |
+|         |       |     |    | 1d20 + -1 | Stealth         |
+|---------+-------+-----+----+-----------+-----------------|
+| CON     |     8 |  -1 | X  | 1d20 + 1  | Saving Throw    |
+|---------+-------+-----+----+-----------+-----------------|
+| INT     |     8 |  -1 | X  | 1d20 + 1  | Saving Throw    |
+|         |       |     |    | 1d20 + -1 | Arcana          |
+|         |       |     | XX | 1d20 + 3  | History         |
+|         |       |     |    | 1d20 + -1 | Investigation   |
+|         |       |     |    | 1d20 + -1 | Nature          |
+|         |       |     |    | 1d20 + -1 | Religion        |
+|---------+-------+-----+----+-----------+-----------------|
+| WIS     |     8 |  -1 | X  | 1d20 + 1  | Saving Throw    |
+|         |       |     |    | 1d20 + -1 | Animal Handling |
+|         |       |     |    | 1d20 + -1 | Insight         |
+|         |       |     |    | 1d20 + -1 | Medicine        |
+|         |       |     | XX | 1d20 + 3  | Perception      |
+|         |       |     |    | 1d20 + -1 | Survival        |
+|---------+-------+-----+----+-----------+-----------------|
+| CHA     |     8 |  -1 |    | 1d20 + -1 | Saving Throw    |
+|         |       |     |    | 1d20 + -1 | Deception       |
+|         |       |     |    | 1d20 + -1 | Intimidation    |
+|         |       |     |    | 1d20 + -1 | Performance     |
+|         |       |     |    | 1d20 + -1 | Persuasion      |
+|---------+-------+-----+----+-----------+-----------------|
+| PROF    |     2 |     |    |           |                 |
+#+TBLFM: @2\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @4\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @8\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @9\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @15\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @21\$3='(calc-dnd-mod (string-to-number \$2))
+#+TBLFM: @2\$5..@3\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @2\$3))))
+#+TBLFM: @4\$5..@7\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @4\$3))))
+#+TBLFM: @8\$5..@8\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @8\$3))))
+#+TBLFM: @9\$5..@14\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @9\$3))))
+#+TBLFM: @15\$5..@20\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @15\$3))))
+#+TBLFM: @21\$5..@25\$5='(concat "1d20 + " (number-to-string (+ (calc-dnd-pb (string-to-number @26\$2) \$4) (string-to-number @21\$3))))
