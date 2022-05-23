@@ -18,6 +18,12 @@
 
 
 ;; === Functions ===
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+
 (defun dnd-load-srd-agenda ()
   "Loads the DnD SRD files in the directory defined by 'dnd-srd-dir' into the org agenda"
   (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
@@ -163,8 +169,7 @@
                                             (setq dnd-prev-yas-snippet-dirs yas-snippet-dirs)
 
                                             (dnd-load-srd-agenda)
-                                            (setq yas-snippet-dirs (append yas-snippet-dirs
-                                                                           '("~/Dropbox/dnd-mode/snippets")))
+                                            (setq yas-snippet-dirs (append yas-snippet-dirs dnd-snippet-dir))
                                             (yas-reload-all)
                                             (message "Dnd Mode is On!"))))
 
