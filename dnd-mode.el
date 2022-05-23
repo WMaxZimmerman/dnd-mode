@@ -169,7 +169,7 @@
                                             (setq dnd-prev-yas-snippet-dirs yas-snippet-dirs)
 
                                             (dnd-load-srd-agenda)
-                                            (setq yas-snippet-dirs (append yas-snippet-dirs dnd-snippet-dir))
+                                            (setq yas-snippet-dirs (append yas-snippet-dirs '(dnd-snippet-dir)))
                                             (yas-reload-all)
                                             (message "Dnd Mode is On!"))))
 
