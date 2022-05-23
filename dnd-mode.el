@@ -7,14 +7,25 @@
 (require 'org)
 
 ;; === Variables ===
-(setq dnd-srd-dir "~/org-dnd-srd/")
-(setq dnd-snippet-dir "~/dnd-mode/snippets")
-(setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
-                                   ,(concat "* TODO %?\n"
-                                            "/Entered on/ %U"))
-                                  ("n" "Note" entry  (file "notes.org")
-                                   ,(concat "* %?\n"
-                                            "/Entered on/ %U"))))
+(defgroup dnd nil
+  "dnd mode for emacs"
+  :link '(url-link "https://github.com/WMaxZimmerman/dnd-mode"))
+
+(defcustom dnd-srd-dir "~/org-dnd-srd/"
+  "location of org-dnd-srd"
+  :type '(string))
+
+(defcustom dnd-snippet-dir "~/dnd-mode/snippets"
+  "location of dnd-mode snippets"
+  :type '(string))
+
+(defcustom dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
+                                        ,(concat "* TODO %?\n"
+                                                 "/Entered on/ %U"))
+                                       ("n" "Note" entry  (file "notes.org")
+                                        ,(concat "* %?\n"
+                                                 "/Entered on/ %U")))
+  "capture templates for use in dnd-mode")
 
 
 ;; === Functions ===
