@@ -2,32 +2,43 @@
 # name: Playable Object - NPC
 # key: props
 # --
-* $1
+* $1                :$2:$3:$4:$5:cr_$6:xp_$7:
 :PROPERTIES:
-:SIZE: $2
-:ALIGNMENT: $3
-:CR: $4
-:XP: $5
+:FROM: $2
+:FAMILY: $3
+:SIZE: $4
+:ALIGNMENT: $5
+:CR: $6
+:XP: $7
 :END:
 
-| STR          | DEX          | CON            | INT            | WIS            | CHA            |
-|--------------+--------------+----------------+----------------+----------------+----------------|
-| $6(${7:Mod}) | $8(${9:Mod}) | $10(${11:Mod}) | $12(${13:Mod}) | $14(${15:Mod}) | $16(${17:Mod}) |
+| STR          | DEX            | CON            | INT            | WIS            | CHA            |
+|--------------+----------------+----------------+----------------+----------------+----------------|
+| $8(${9:Mod}) | $10(${11:Mod}) | $12(${13:Mod}) | $14(${15:Mod}) | $16(${17:Mod}) | $18(${19:Mod}) |
 
 | Walk Speed | Climb Speed | Swim Speed | Fly Speed | Hit Points | AC  |
 |------------+-------------+------------+-----------+------------+-----|
-| $19        | $20         | $21        | $22       | $23        | $24 |
+| $20        | $21         | $22        | $23       | $24        | $25 |
 
+** About
+      
 ** Immunities
-   - $25
-  
-** Resistances
-   - $26
-  
-** Features
-   - $27
+   - *Damage*
 
+   - *Conditional*
+     
+** Resistances
+   - *Damage*
+
+   - *Conditional*
+
+** Features
+   - *Senses*
+   
 ** Actions
-   - $28
+   #+NAME: attacks
+   | Weapon | Ability | Prof | Type | Die | Mod To Hit | Roll |
+   |--------+---------+------+------+-----+------------+------|
+   |        |         |      |      |     |            |      |
 
 $0
