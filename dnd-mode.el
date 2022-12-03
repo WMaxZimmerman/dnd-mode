@@ -8,7 +8,6 @@
 
 ;; === Variables ===
 (setq dnd-srd-dir "~/.emacs.d/ignore/org-dnd-srd/")
-(setq dnd-dir "~/.emacs.d/ignore/org-dnd/")
 (setq dnd-snippet-dir "~/.emacs.d/ignore/dnd-mode/snippets")
 (setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
                                    ,(concat "* TODO %?\n"
@@ -29,11 +28,6 @@
   "Loads the DnD SRD files in the directory defined by 'dnd-srd-dir' into the org agenda"
   (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
                                  (read-lines (concat dnd-srd-dir ".agenda-index")))))
-
-(defun dnd-load-agenda ()
-  "Loads the DnD files in the directory defined by 'dnd-dir' into the org agenda"
-  (setq org-agenda-files (mapcar (lambda (path) (concat dnd-dir path))
-                                 (read-lines (concat dnd-dir ".agenda-index")))))
 
 (defun dnd-select-session-target ()
   "Sets the org agenda/capture to a the specified directory"
