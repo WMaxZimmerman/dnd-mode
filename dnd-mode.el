@@ -7,14 +7,25 @@
 (require 'org)
 
 ;; === Variables ===
-(setq dnd-srd-dir "~/org-dnd-srd/")
-(setq dnd-snippet-dir "~/dnd-mode/snippets")
-(setq dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
-                                   ,(concat "* TODO %?\n"
-                                            "/Entered on/ %U"))
-                                  ("n" "Note" entry  (file "notes.org")
-                                   ,(concat "* %?\n"
-                                            "/Entered on/ %U"))))
+(defgroup dnd nil
+  "dnd mode for emacs"
+  :link '(url-link "https://github.com/WMaxZimmerman/dnd-mode"))
+
+(defcustom dnd-srd-dir "~/org-dnd-srd/"
+  "location of org-dnd-srd"
+  :type '(string))
+
+(defcustom dnd-snippet-dir "~/dnd-mode/snippets"
+  "location of dnd-mode snippets"
+  :type '(string))
+
+(defcustom dnd-org-capture-templates `(("i" "Inbox" entry  (file "inbox.org")
+                                        ,(concat "* TODO %?\n"
+                                                 "/Entered on/ %U"))
+                                       ("n" "Note" entry  (file "notes.org")
+                                        ,(concat "* %?\n"
+                                                 "/Entered on/ %U")))
+  "capture templates for use in dnd-mode")
 
 
 ;; === Functions ===
@@ -26,18 +37,18 @@
 
 (defun dnd-load-srd-agenda ()
   "Loads the DnD SRD files in the directory defined by 'dnd-srd-dir' into the org agenda"
-  (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
-                                 (read-lines (concat dnd-srd-dir ".agenda-index")))))
+  (setq-local org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
+                                       (read-lines (concat dnd-srd-dir ".agenda-index")))))
 
 (defun dnd-select-session-target ()
   "Sets the org agenda/capture to a the specified directory"
   (interactive)
   (setq dir (read-directory-name "dir:"))
   (progn (dnd-load-srd-agenda)
-         (setq org-agenda-files (append org-agenda-files (mapcar (lambda (path) (concat dir path))
-                                                                 (read-lines (concat dir ".agenda-index")))))
-         (setq org-directory (concat dir "org/"))
-         (setq org-capture-templates dnd-org-capture-templates)))
+         (setq-local org-agenda-files (append org-agenda-files (mapcar (lambda (path) (concat dir path))
+                                                                       (read-lines (concat dir ".agenda-index")))))
+         (setq-local org-directory (concat dir "org/"))
+         (setq-local org-capture-templates dnd-org-capture-templates)))
 
 
 (defun rtd ()
@@ -129,7 +140,7 @@
 
   (defun my-org-confirm-babel-evaluate (lang body)
     (not (string= lang "elisp")))  ;don't ask for ditaa
-  (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
+  (setq-local org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
   
   (org-ctrl-c-ctrl-c)
 
@@ -147,8 +158,7 @@
 ;; ==== Minor Mode ===
 (define-minor-mode dnd-mode
   "Toggles global dnd-mode"
-  nil
-  :global t
+  :global nil
   :lighter " dnd"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c r") 'rtd)
@@ -160,27 +170,24 @@
       (message "dnd-mode activated!")
     (message "dnd-mode deactivated!")))
 
-(add-hook 'dnd-mode-hook (lambda () (message "Dnd Mode did thing")))
+(add-hook 'dnd-mode-hook (lambda () ()))
 
 (add-hook 'dnd-mode-on-hook (lambda () (progn
-                                            (setq dnd-prev-org-capture-templates org-capture-templates)
-                                            (setq dnd-prev-org-directory org-directory)
-                                            (setq dnd-prev-org-agenda-files org-agenda-files)
-                                            (setq dnd-prev-yas-snippet-dirs yas-snippet-dirs)
+                                         (setq-local org-capture-templates dnd-org-capture-templates)
+                                         (setq-local yas-snippet-dirs (append yas-snippet-dirs '(dnd-snippet-dir)))
+                                         (dnd-load-srd-agenda)
+                                         (yas-reload-all)
+                                         (message "Dnd Mode is On!"))))
 
-                                            (dnd-load-srd-agenda)
-                                            (setq yas-snippet-dirs (append yas-snippet-dirs '(dnd-snippet-dir)))
-                                            (yas-reload-all)
-                                            (message "Dnd Mode is On!"))))
 
-(add-hook 'dnd-mode-off-hook (lambda () (progn 
-                                            (setq org-capture-templates dnd-prev-org-capture-templates)
-                                            (setq org-directory dnd-prev-org-directory)
-                                            (setq org-agenda-files dnd-prev-org-agenda-files)
-                                            (setq yas-snippet-dirs dnd-prev-yas-snippet-dirs)
-                                            (yas-reload-all)
-
-                                            (message "Dnd Mode is Off!"))))
+(add-hook 'dnd-mode-off-hook (lambda () (progn
+                                          (kill-local-variable 'org-capture-templates)
+                                          (kill-local-variable 'yas-snippet-dirs)
+                                          (kill-local-variable 'org-directory)
+                                          (kill-local-variable 'org-agenda-files)
+                                          (yas-reload-all)
+                                          (message "Dnd Mode is Off!")
+                                          )))
 
 (provide 'dnd)
 ;;; dnd.el ends here
