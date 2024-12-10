@@ -85,6 +85,19 @@
       0)))
 
 
+(defun calc-dnd-offhand-mod (mod check)
+  "Calculates the Proficiency Bonus to use based on the check and value provided"
+  (if (string= check "X")
+      0
+    mod))
+
+(defun calc-dnd-bonus-dmg (bonus)
+  "Calculates the Proficiency Bonus to use based on the check and value provided"
+  (if (string= bonus "-")
+      ""
+      (concat " + " bonus)))
+
+
 (defun dnd-output-ability-constants (table)
   "Outputs constants for the Ability Modifiers"
   (setq consts (mapcar (lambda (row) (format "#+CONSTANTS: %s=%s\n" (nth 0 row) (nth 1 row))) table))
