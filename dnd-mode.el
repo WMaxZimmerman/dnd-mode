@@ -95,12 +95,58 @@
   "Calculates the Proficiency Bonus to use based on the check and value provided"
   (if (string= bonus "-")
       ""
-      (concat " + " bonus)))
+    (concat " + " bonus)))
+
+(defun dnd-reset-based-on-rest (sr lr used sr_refill lr_refill)
+  "Calculates the Proficiency Bonus to use based on the check and value provided"
+  (if (string= sr "X")
+      (if (string= sr_refill "X")
+          0
+        (if (string= sr_refill "-")
+            used
+          (- (string-to-number used) (string-to-number sr_refill))))
+    (if (string= lr "X")
+        (if (string= lr_refill "X")
+            0
+          (if (string= lr_refill "-")
+              (string-to-number used)
+            (- used (string-to-number lr_refill))))
+      used)))
+
+(defun index (object list)
+  "return the index of object in list"
+  (let ((counter 0)
+        (found nil))
+    (catch 'finished
+      (dolist (listelement list counter)
+        (if (equal object listelement)
+            (progn
+              (setq found t)
+              (throw 'finished counter))
+          ;; else increment counter
+          (incf counter)))
+    ;; if we found it return counter otherwise return nil
+    (if found counter nil))))
+
+
+(defun dnd-get-stat (ability)
+  "Outputs constants for the Ability Modifiers"
+  (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
+  (setq abilities (mapcar (lambda (field) (org-no-properties field)) (org-table-get-remote-range "stats" "@1$1..@1$>")))
+  (setq abilityIndex (index ability abilities))
+  (if (string= ability "SHORT")
+      (nth abilityIndex values)
+    (if (string= ability "LONG")
+        (nth abilityIndex values)
+      (string-to-number (nth abilityIndex values))
+        )
+      )
+  )
 
 
 (defun dnd-output-ability-constants (table)
   "Outputs constants for the Ability Modifiers"
-  (setq consts (mapcar (lambda (row) (format "#+CONSTANTS: %s=%s\n" (nth 0 row) (nth 1 row))) table))
+  (setq consts (mapcar (lambda (row) (format "#+CONSTANTS: %s=%s\n" (nth 0 row) (if (string= (format "%s" (nth 1 row)) "X") (format "\"%s\"" (nth 1 row)) (if (string= (format "%s" (nth 1 row)) "-") (format "\"%s\"" (nth 1 row)) (nth 1 row))))) table))
   (while consts
     (if (string= "#+CONSTANTS: Allowed=27\n" (car consts))
         (setq consts (cdr consts))
@@ -129,22 +175,21 @@
 (defun dnd-eval-charsheet ()
   "Evaluates the dnd character sheet that you are currently in"
   (interactive)
-  
   (setq starting-point (point))
   (outline-show-all)
   (goto-char (point-min))
 
-  (search-forward "BEGIN_SRC")
-  (org-babel-execute-src-block)
-  (search-forward ":results:")
-  (next-line)
-  (backward-word)
+  ;; (search-forward "BEGIN_SRC")
+  ;; (org-babel-execute-src-block)
+  ;; (search-forward ":results:")
+  ;; (next-line)
+  ;; (backward-word)
 
   (defun my-org-confirm-babel-evaluate (lang body)
     (not (string= lang "elisp")))  ;don't ask for ditaa
   (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
   
-  (org-ctrl-c-ctrl-c)
+  ;;(org-ctrl-c-ctrl-c)
 
   (unwind-protect
       (while (string= "1" "1")
@@ -152,8 +197,8 @@
         (org-ctrl-c-ctrl-c))
     (progn 
       (goto-char (point-min))
-      (search-forward "* Constants")
-      (outline-hide-leaves)
+      ;; (search-forward "* Constants")
+      ;; (outline-hide-leaves)
       (goto-char starting-point))))
 
 
@@ -165,7 +210,7 @@
   :lighter " dnd"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c r") 'rtd)
-            (define-key map (kbd "C-c e") 'dnd-eval-charsheet)
+            (define-key map (kbd "C-c e") 'org-table-recalculate-buffer-tables)
             (define-key map (kbd "C-c s") 'dnd-select-session-target)
             map)
   
