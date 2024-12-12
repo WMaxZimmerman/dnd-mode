@@ -128,6 +128,11 @@
     ;; if we found it return counter otherwise return nil
     (if found counter nil))))
 
+(defun dnd-calc-dice (die count xlScale)
+  "Outputs constants for the Ability Modifiers"
+  (setq diceCount (* (string-to-number count) xlScale))
+  (format "%s%s" diceCount die)
+  )
 
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
