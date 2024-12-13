@@ -128,25 +128,61 @@
     ;; if we found it return counter otherwise return nil
     (if found counter nil))))
 
-(defun dnd-calc-dice (die count xlScale)
+(defun dnd-calc-size-mod (size)
   "Outputs constants for the Ability Modifiers"
-  (setq diceCount (* (string-to-number count) xlScale))
-  (format "%s%s" diceCount die)
-  )
+  (if (string= size "Tiny") 0.5
+    (if (string= size "Small") 1
+      (if (string= size "Medium") 1
+        (if (string= size "Large") 2
+          (if (string= size "Huge") 3
+            (if (string= size "Gargantuan") 4 1)))))))
+
+(defun dnd-calc-carry-capacity (STR size bonus)
+  "Outputs constants for the Ability Modifiers"
+  (setq carryMod 7.5)
+  (setq sizeScale (+ (truncate (dnd-calc-size-mod size)) bonus))
+  (setq iterator 0)
+  (while (< iterator sizeScale)
+    (setq carryMod (* carryMod 2))
+    (setq iterator (1+ iterator)))
+  (* STR carryMod))
+
+(defun dnd-calc-drag-capacity (STR size bonus)
+  "Outputs constants for the Ability Modifiers"
+  (setq carryMod 15)
+  (setq sizeScale (+ (truncate (dnd-calc-size-mod size)) bonus))
+  (setq iterator 0)
+  (while (< iterator sizeScale)
+    (setq carryMod (* carryMod 2))
+    (setq iterator (1+ iterator)))
+  (* STR carryMod))
+
+(defun dnd-half-die (die)
+  "Outputs constants for the Ability Modifiers"
+  (setq halvedDie (/ die 2))
+  (if (= (% halvedDie 2) 0)
+      halvedDie
+    (- halvedDie 1)
+    ))
+
+(defun dnd-calc-dice (die count size)
+  "Outputs constants for the Ability Modifiers"
+  (setq sizeMod (dnd-calc-size-mod size))
+  (if (>= sizeMod 1)
+      (progn
+        (setq diceCount (* (string-to-number count) sizeMod))
+        (format "%sd%s" diceCount die))
+    (format "%sd%s" count (dnd-half-die (string-to-number die)))))
 
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
   (setq abilities (mapcar (lambda (field) (org-no-properties field)) (org-table-get-remote-range "stats" "@1$1..@1$>")))
   (setq abilityIndex (index ability abilities))
-  (if (string= ability "SHORT")
-      (nth abilityIndex values)
-    (if (string= ability "LONG")
-        (nth abilityIndex values)
-      (string-to-number (nth abilityIndex values))
-        )
-      )
-  )
+  (setq value (nth abilityIndex values))
+  (if (string-match-p "^-?\\(?:\\(?:\\(?:0\\|[1-9][0-9]*\\)?[.][0-9]+\\)\\|\\(?:0\\|[1-9][0-9]*\\)\\)\\(?:e-?\\(?:0\\|[1-9][0-9]*\\)?\\)?$" (format "%s" value))
+      (string-to-number (format "%s" value))
+    (format "%s" value)))
 
 
 (defun dnd-output-ability-constants (table)
