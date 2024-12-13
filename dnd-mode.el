@@ -174,6 +174,10 @@
         (format "%sd%s" diceCount die))
     (format "%sd%s" count (dnd-half-die (string-to-number die)))))
 
+(defun dnd-calc-unarmored-defense (dex con)
+  "Outputs constants for the Ability Modifiers"
+  (+ 10 (calc-dnd-mod dex) (calc-dnd-mod con)))
+
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
