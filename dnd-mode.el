@@ -178,6 +178,50 @@
   "Outputs constants for the Ability Modifiers"
   (+ 10 (calc-dnd-mod dex) (calc-dnd-mod con)))
 
+(defun dnd-calc-ac (armor dex con bonus shield)
+  "Outputs constants for the Ability Modifiers"
+  (setq mod (calc-dnd-mod dex))
+  (setq conMod (calc-dnd-mod con))
+  (setq armorBaseAc (dnd-get-armor-base-ac armor))
+  (setq armorType (dnd-get-armor-type armor))
+  (if (string= armorType "light") (+ armorBaseAc mod bonus shield)
+    (if (string= armorType "medium") (+ armorBaseAc (if (> mod 2) 2 mod) bonus shield)
+      (if (string= armorType "heavy") (+ armorBaseAc bonus shield) 
+        (if (string= armorType "unarmored") (+ armorBaseAc mod conMod bonus shield) (+ armorBaseAc mod bonus shield))))))
+
+(defun dnd-get-armor-type (armor)
+  "Outputs constants for the Ability Modifiers"
+  (if (string= armor "Padded") "light"
+    (if (string= armor "Leather") "light"
+      (if (string= armor "Studded Leather") "light"
+        (if (string= armor "Hide") "medium"
+          (if (string= armor "Chain Shirt") "medium"
+            (if (string= armor "Scale Mail") "medium"
+              (if (string= armor "Spiked Armor") "medium"
+                (if (string= armor "Breastplate") "medium"
+                  (if (string= armor "Halfplate") "medium"
+                    (if (string= armor "Ring Mail") "heavy"
+                      (if (string= armor "Chain Mail") "heavy"
+                        (if (string= armor "Splint") "heavy"
+                          (if (string= armor "Plate") "heavy" 
+                            (if (string= armor "Unarmored") "unarmored" "none")))))))))))))))
+
+(defun dnd-get-armor-base-ac (armor)
+  "Outputs constants for the Ability Modifiers"
+  (if (string= armor "Padded") 11
+    (if (string= armor "Leather") 11
+      (if (string= armor "Studded Leather") 12
+        (if (string= armor "Hide") 12
+          (if (string= armor "Chain Shirt") 13
+            (if (string= armor "Scale Mail") 14
+              (if (string= armor "Spiked Armor") 14
+                (if (string= armor "Breastplate") 14
+                  (if (string= armor "Halfplate") 15
+                    (if (string= armor "Ring Mail") 14
+                      (if (string= armor "Chain Mail") 16
+                        (if (string= armor "Splint") 17
+                          (if (string= armor "Plate") 18 10))))))))))))))
+
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
