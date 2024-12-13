@@ -18,7 +18,7 @@
 
 
 ;; === Functions ===
-(defun read-lines (filePath)
+(defun dnd-read-lines (filePath)
   "Return a list of lines of a file at filePath."
   (with-temp-buffer
     (insert-file-contents filePath)
@@ -27,7 +27,7 @@
 (defun dnd-load-srd-agenda ()
   "Loads the DnD SRD files in the directory defined by 'dnd-srd-dir' into the org agenda"
   (setq org-agenda-files (mapcar (lambda (path) (concat dnd-srd-dir path))
-                                 (read-lines (concat dnd-srd-dir ".agenda-index")))))
+                                 (dnd-read-lines (concat dnd-srd-dir ".agenda-index")))))
 
 (defun dnd-select-session-target ()
   "Sets the org agenda/capture to a the specified directory"
@@ -35,7 +35,7 @@
   (setq dir (read-directory-name "dir:"))
   (progn (dnd-load-srd-agenda)
          (setq org-agenda-files (append org-agenda-files (mapcar (lambda (path) (concat dir path))
-                                                                 (read-lines (concat dir ".agenda-index")))))
+                                                                 (dnd-read-lines (concat dir ".agenda-index")))))
          (setq org-directory (concat dir "org/"))
          (setq org-capture-templates dnd-org-capture-templates)))
 
@@ -70,7 +70,7 @@
   (message "You rolled %d" dnd-total))
 
 
-(defun calc-dnd-mod (score)
+(defun dnd-calc-mod (score)
   "Calculates the modifier of the given DND ability score"
   (message "input is: %d" score)
   (floor (- (/ score 2) 5)))
@@ -176,18 +176,18 @@
 
 (defun dnd-calc-unarmored-defense (dex con)
   "Outputs constants for the Ability Modifiers"
-  (+ 10 (calc-dnd-mod dex) (calc-dnd-mod con)))
+  (+ 10 (dnd-calc-mod dex) (dnd-calc-mod con)))
 
 (defun dnd-calc-spell-save-dc (ability prof has_dc)
   "Outputs constants for the Ability Modifiers"
   (if (string= has_dc "X")
-      (+ prof (calc-dnd-mod ability) 8)
+      (+ prof (dnd-calc-mod ability) 8)
     (format "%s" "-")))
 
 (defun dnd-calc-ac (armor dex con bonus shield)
   "Outputs constants for the Ability Modifiers"
-  (setq mod (calc-dnd-mod dex))
-  (setq conMod (calc-dnd-mod con))
+  (setq mod (dnd-calc-mod dex))
+  (setq conMod (dnd-calc-mod con))
   (setq armorBaseAc (dnd-get-armor-base-ac armor))
   (setq armorType (dnd-get-armor-type armor))
   (if (string= armorType "light") (+ armorBaseAc mod bonus shield)
@@ -251,7 +251,7 @@
                (setq consts (cdr consts)))))))
 
 
-(defun calc-dnd-point-buy-cost (score)
+(defun dnd-calc-point-buy-cost (score)
   "Calculates the point buy value of the given ability score"
   (setq base-cost (- (string-to-number score) 8))
   (setq cost 0)
