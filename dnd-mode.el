@@ -76,7 +76,7 @@
   (floor (- (/ score 2) 5)))
 
 
-(defun calc-dnd-pb (pb check)
+(defun dnd-calc-pb (pb check)
   "Calculates the Proficiency Bonus to use based on the check and value provided"
   (if (string= check "X")
       pb
@@ -85,13 +85,13 @@
       0)))
 
 
-(defun calc-dnd-offhand-mod (mod check)
+(defun dnd-calc-offhand-mod (mod check)
   "Calculates the Proficiency Bonus to use based on the check and value provided"
   (if (string= check "X")
       0
     mod))
 
-(defun calc-dnd-bonus-dmg (bonus)
+(defun dnd-calc-bonus-dmg (bonus)
   "Calculates the Proficiency Bonus to use based on the check and value provided"
   (if (string= bonus "-")
       ""
@@ -113,7 +113,7 @@
             (- used (string-to-number lr_refill))))
       used)))
 
-(defun index (object list)
+(defun dnd-index (object list)
   "return the index of object in list"
   (let ((counter 0)
         (found nil))
@@ -232,7 +232,7 @@
   "Outputs constants for the Ability Modifiers"
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
   (setq abilities (mapcar (lambda (field) (org-no-properties field)) (org-table-get-remote-range "stats" "@1$1..@1$>")))
-  (setq abilityIndex (index ability abilities))
+  (setq abilityIndex (dnd-index ability abilities))
   (setq value (nth abilityIndex values))
   (if (string-match-p "^-?\\(?:\\(?:\\(?:0\\|[1-9][0-9]*\\)?[.][0-9]+\\)\\|\\(?:0\\|[1-9][0-9]*\\)\\)\\(?:e-?\\(?:0\\|[1-9][0-9]*\\)?\\)?$" (format "%s" value))
       (string-to-number (format "%s" value))
