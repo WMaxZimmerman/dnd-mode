@@ -178,6 +178,12 @@
   "Outputs constants for the Ability Modifiers"
   (+ 10 (calc-dnd-mod dex) (calc-dnd-mod con)))
 
+(defun dnd-calc-spell-save-dc (ability prof has_dc)
+  "Outputs constants for the Ability Modifiers"
+  (if (string= has_dc "X")
+      (+ prof (calc-dnd-mod ability) 8)
+    (format "%s" "-")))
+
 (defun dnd-calc-ac (armor dex con bonus shield)
   "Outputs constants for the Ability Modifiers"
   (setq mod (calc-dnd-mod dex))
