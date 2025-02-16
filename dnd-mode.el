@@ -157,6 +157,16 @@
     (setq iterator (1+ iterator)))
   (* STR carryMod))
 
+(defun dnd-calc-hp (CON hitDie level)
+  "Outputs constants for the Ability Modifiers"
+  (setq conMod (dnd-calc-mod CON))
+  (setq hp (+ hitDie conMod))
+  (setq iterator 1)
+  (while (< iterator level)
+    (setq hp (+ hp (+ (ceiling (/ hitDie 2)) conMod)))
+    (setq iterator (1+ iterator)))
+  (format "%s" hp))
+
 (defun dnd-half-die (die)
   "Outputs constants for the Ability Modifiers"
   (setq halvedDie (/ die 2))
