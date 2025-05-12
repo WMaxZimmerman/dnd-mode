@@ -114,19 +114,20 @@
       used)))
 
 (defun dnd-index (object list)
-  "return the index of object in list"
-  (let ((counter 0)
-        (found nil))
-    (catch 'finished
-      (dolist (listelement list counter)
-        (if (equal object listelement)
-            (progn
-              (setq found t)
-              (throw 'finished counter))
-          ;; else increment counter
-          (incf counter)))
-    ;; if we found it return counter otherwise return nil
-    (if found counter nil))))
+  "Return the index of OBJECT (string or symbol) in LIST, comparing string representations."
+  (let ((index 0)
+        (needle (format "%s" object)))
+    (catch 'found
+      (dolist (el list)
+        (let ((el-str (format "%s" el)))
+          (message "Comparing %S to %S" needle el-str)
+          (when (string= needle el-str)
+            (message "Match found at %d" index)
+            (throw 'found index)))
+        (setq index (1+ index)))
+      ;; only runs if no match
+      (message "No match found")
+      nil)))
 
 (defun dnd-calc-size-mod (size)
   "Outputs constants for the Ability Modifiers"
@@ -240,9 +241,13 @@
 
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
+  (message (format "%s" ability))
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
+  (message (format "%s" values))
   (setq abilities (mapcar (lambda (field) (org-no-properties field)) (org-table-get-remote-range "stats" "@1$1..@1$>")))
+  (message (format "%s" abilities))
   (setq abilityIndex (dnd-index ability abilities))
+  (message (format "%s" abilityIndex))
   (setq value (nth abilityIndex values))
   (if (string-match-p "^-?\\(?:\\(?:\\(?:0\\|[1-9][0-9]*\\)?[.][0-9]+\\)\\|\\(?:0\\|[1-9][0-9]*\\)\\)\\(?:e-?\\(?:0\\|[1-9][0-9]*\\)?\\)?$" (format "%s" value))
       (string-to-number (format "%s" value))
