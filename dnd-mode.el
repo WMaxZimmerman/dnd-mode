@@ -241,13 +241,9 @@
 
 (defun dnd-get-stat (ability)
   "Outputs constants for the Ability Modifiers"
-  (message (format "%s" ability))
   (setq values (org-table-get-remote-range "stats" "@2$1..@>$>"))
-  (message (format "%s" values))
   (setq abilities (mapcar (lambda (field) (org-no-properties field)) (org-table-get-remote-range "stats" "@1$1..@1$>")))
-  (message (format "%s" abilities))
   (setq abilityIndex (dnd-index ability abilities))
-  (message (format "%s" abilityIndex))
   (setq value (nth abilityIndex values))
   (if (string-match-p "^-?\\(?:\\(?:\\(?:0\\|[1-9][0-9]*\\)?[.][0-9]+\\)\\|\\(?:0\\|[1-9][0-9]*\\)\\)\\(?:e-?\\(?:0\\|[1-9][0-9]*\\)?\\)?$" (format "%s" value))
       (string-to-number (format "%s" value))
