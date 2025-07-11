@@ -1,0 +1,270 @@
+#+STARTUP: content showstars indent
+#+OPTIONS: tags:nil
+#+TITLE: Smiles - Character Sheet
+#+FILETAGS: smiles char_sheet
+  
+* Traits
+| Level | Race    | Subrace | Class     | Subclass      | Size             | Alignment   | Age |
+|-------+---------+---------+-----------+---------------+------------------+-------------+-----|
+|     8 | Goliath | Cloud   | Barbarian | Path of Giant | Medium (6ft 9in) | Lawful Good |  25 |
+
+* Stats
+#+NAME: stuff
+| ! | Walking Speed | AC | Current | HP | Temp | Death Saves | Inspiration | Armor     | Armor_Bonus | Shield | Creature_Type |
+|---+---------------+----+---------+----+------+-------------+-------------+-----------+-------------+--------+---------------|
+| # | 45 ft         | 19 |      81 | 86 |      |             | X           | Unarmored | -           | -      | Humanoid      |
+#+TBLFM: $3='(dnd-calc-ac $Armor (dnd-get-stat "DEX") (dnd-get-stat "CON") (string-to-number $Armor_Bonus) (string-to-number $Shield))::$5='(dnd-calc-hp (dnd-get-stat "CON") (dnd-get-stat "Hit_Die") (dnd-get-stat "Lvl"))
+
+* Saves and Skills
+** Saves
+#+NAME: saves
+| ! | Ability | Score | Saving Throw | Mod | PB |
+|---+---------+-------+--------------+-----+----|
+| # | STR     |    23 | 1d20 + 9     |   6 | X  |
+| # | DEX     |    20 | 1d20 + 5     |   5 | -  |
+| # | CON     |    18 | 1d20 + 7     |   4 | X  |
+| # | INT     |    10 | 1d20 + 0     |   0 | -  |
+| # | WIS     |    13 | 1d20 + 1     |   1 | -  |
+| # | CHA     |    10 | 1d20 + 0     |   0 | -  |
+#+TBLFM: @2$3..@7$3='(dnd-get-stat $Ability)::@2$4..@7$4='(format "1d20 + %s" (+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (dnd-calc-mod (dnd-get-stat $Ability))))::@2$5..@7$5='(dnd-calc-mod (dnd-get-stat $Ability))
+
+** Skills
+#+name: skills
+| ! | Ability | Skill           | Roll     | PB |
+|---+---------+-----------------+----------+----|
+| # | STR     | Athletics       | 1d20 + 9 | X  |
+|---+---------+-----------------+----------+----|
+| # | DEX     | Acrobatics      | 1d20 + 5 | -  |
+| # | DEX     | Sleight of Hand | 1d20 + 5 | -  |
+| # | DEX     | Stealth         | 1d20 + 5 | -  |
+|---+---------+-----------------+----------+----|
+| # | INT     | Arcana          | 1d20 + 0 | -  |
+| # | INT     | History         | 1d20 + 0 | -  |
+| # | INT     | Investigation   | 1d20 + 0 | -  |
+| # | INT     | Nature          | 1d20 + 0 | -  |
+| # | INT     | Religion        | 1d20 + 0 | -  |
+|---+---------+-----------------+----------+----|
+| # | WIS     | Animal Handling | 1d20 + 4 | X  |
+| # | WIS     | Insight         | 1d20 + 1 | -  |
+| # | WIS     | Medicine        | 1d20 + 1 | -  |
+| # | WIS     | Perception      | 1d20 + 4 | X  |
+| # | WIS     | Survival        | 1d20 + 4 | X  |
+|---+---------+-----------------+----------+----|
+| # | CHA     | Deception       | 1d20 + 0 | -  |
+| # | CHA     | Intimidation    | 1d20 + 3 | X  |
+| # | CHA     | Performance     | 1d20 + 0 | -  |
+| # | CHA     | Persuasion      | 1d20 + 0 | -  |
+#+TBLFM: @2$4..@19$4='(format "1d20 + %s" (+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (dnd-calc-mod (dnd-get-stat $Ability))))
+
+* Combat                                                             :combat:
+** Actions                                                          :action:
+*** Extra Attack
+You can attack twice instead of once whenever you take the Attack action on your
+turn.
+
+*** Spells
+**** Thaumaturgy
+- Casting Time :: 1 action
+- Range :: 30 feet
+- Components :: V
+- Duration :: Up to 1 minute
+
+***** Description
+You manifest a minor wonder, a sign of supernatural power, within range. You
+create one of the following magical effects within range:
+
+- Your voice booms up to three times as loud as normal for 1 minute.
+
+- You cause flames to flicker, brighten, dim, or change color for 1 minute.
+
+- You cause harmless tremors in the ground for 1 minute.
+
+- You create an instantaneous sound that originate from a point of your choice
+  within range, such as a rumble of thunder, the cry of a rave, or ominous
+  whispers.
+
+- You instantaneously cause an unlocked door or window to fly open or slam shut.
+
+- You alter the appearance of your eyes for 1 minute.
+  
+If you cast this spell multiple times, your can have up to three of its 1-minute
+effect active at a time, and you can dismiss such an effect as an action.
+
+*** Attacks                                                        :attack:
+#+NAME: attacks
+| ! | Weapon         | Mod | Roll               | LG_Roll            | Mastery  | Bonus_DMG | Bonus_Mod | Ability | PB | Type        | Die | DieCount | Offhand_Penalty | Hands |
+|---+----------------+-----+--------------------+--------------------+----------+-----------+-----------+---------+----+-------------+-----+----------+-----------------+-------|
+| # | Battleaxe (2H) |   9 | 1d10 + 6 + 2 + 1d6 | 2d10 + 6 + 2 + 1d6 | X/Topple | 2 + 1d6   |         0 | STR     | X  | Slashing    |  10 |        1 | -               |     2 |
+| # | Battleaxe (1H) |   9 | 1d8 + 6 + 2 + 1d6  | 2d8 + 6 + 2 + 1d6  | X/Topple | 2 + 1d6   |         0 | STR     | X  | Slashing    |   8 |        1 | -               |     1 |
+| # | Battleaxe (OH) |   9 | 1d8 + 0 + 2        | 2d8 + 0 + 2        | X/Topple | 2         |         0 | STR     | X  | Slashing    |   8 |        1 | X               |     1 |
+| # | War Pick (OH)  |   9 | 1d8 + 0 + 2        | 2d8 + 0 + 2        | X/Sap    | 2         |         0 | STR     | X  | Piercing    |   8 |        1 | X               |     1 |
+| # | Greataxe (2H)  |   9 | 1d12 + 6 + 2 + 1d6 | 2d12 + 6 + 2 + 1d6 | X/Cleave | 2 + 1d6   |         0 | STR     | X  | Slashing    |  12 |        1 | -               |     2 |
+| # | Unarmed Strike |   9 | 1d4 + 6            | 2d4 + 6            | -        | -         |         0 | STR     | X  | Bludgeoning |   4 |        1 | -               |     1 |
+#+TBLFM: $3='(+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (dnd-calc-mod (dnd-get-stat $Ability)) (string-to-number $Bonus_Mod))::$4='(format "%s + %s%s" (dnd-calc-dice $Die $DieCount (dnd-get-stat "SIZE")) (dnd-calc-offhand-mod (dnd-calc-mod (dnd-get-stat $Ability)) $Offhand_Penalty) (dnd-calc-bonus-dmg $Bonus_DMG))::$5='(format "%s + %s%s" (dnd-calc-dice $Die $DieCount "Large") (dnd-calc-offhand-mod (dnd-calc-mod (dnd-get-stat $Ability)) $Offhand_Penalty) (dnd-calc-bonus-dmg $Bonus_DMG))
+
+**** Triggers                                                    :trigger:
+#+NAME: attack_triggers
+| ! | Trigger         | Effect                          | Triggered_By   | DC     | PB | Ability |
+|---+-----------------+---------------------------------+----------------+--------+----+---------|
+| # | Topple          | Knock Prone                     | Mastery        | 17     | X  | STR     |
+| # | Cleave          | Attack another enemy within 5ft | Mastery        | #ERROR | -  | -       |
+| # | Sap             | Attack another enemy within 5ft | Mastery        | #ERROR | -  | -       |
+| # | Reckless Attack | Attack & Attacked With Adv      | Mastery        | #ERROR | -  | -       |
+| # | Damage Reroll   | Reroll 1s for damage            | Unarmed Strike | #ERROR | -  | -       |
+#+TBLFM: $5='(+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (dnd-calc-mod (dnd-get-stat $Ability)) 8)
+
+***** Descriptions                                          :description:
+****** Mastery                                          :mastery:weapon:
+******* Topple
+If you hit a creature with this weapon, you can force the creature to make a
+Constitution saving throw (DC 8 plus the ability modifier used to make the
+attack roll and your Proficiency Bonus). On a failed save, the creature has the
+Prone condition.
+
+******* Cleave
+If you hit a creature with a melee attack roll using this weapon, you can make a
+melee attack roll with the weapon against a second creature with 5 feet of the
+first that is also within your reach. On a hit, the second creature takes the
+weapon's damage, but don't add your ability modifier to that damage unless that
+modifier is negative. You can make this extra attack only once per turn.
+
+******* Sap
+An enemy you hit has Disadvantage on their next attack roll before the start of
+your next turn.
+
+** Bonus Actions                                              :bonus_action:
+#+NAME: bonus_actions
+| ! | Bonus Action   | Used | Total | Refills  | Count | PB |
+|---+----------------+------+-------+----------+-------+----|
+| # | Offhand Attack |    - |     0 | -        |     - | -  |
+| # | Large Form     |    0 |     1 | LR       |     1 | -  |
+| # | Cloud's Jaunt  |    0 |     3 | LR       |     0 | X  |
+| # | Rage           |    1 |     4 | SR(1)/LR |     4 | -  |
+#+TBLFM: $4='(+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (string-to-number $Count))
+
+*** Triggers                                                      :trigger:
+#+NAME: bonus_action_triggers
+| Triggered By | Trigger       | Effect                    |
+|--------------+---------------+---------------------------|
+| Rage         | Giant Stature | +5ft reach; Size is Large |
+
+*** Descriptions                                              :description:
+**** Large Form                                             :race:goliath:
+Starting at character Level 5, you can change your size to Large as a Bonus
+Action if you're in a big enough space. This transformation lasts for 10 minutes
+or until you end it (no action required). For that duration, you have Advantage
+on Strength checks, and your Speed increases by 10 feet. Once you use this trait,
+you can't use it again until you finish a Long Rest.
+
+**** Cloud's Jaunt                                          :race:goliath:
+As a Bonus Action, you magically teleport up to 30 feet to an unoccupied space
+you can see.
+
+**** Rage                                                :class:barbarian:
+You can imbue yourself with a primal power called Rage, a force that grants you
+extraordinary mights and resilience. You can enter it as a Bonus Action if you
+aren't wearing Heavy armor.
+
+You can enter your Rage the number of times shown for your Barbarian level in
+the Rages column of the Barbarian Features table. You regain one expended use
+when you finish a Short Rest, and you regain all expended uses when you finish a
+Long Rest.
+
+While active, your Rage follows the rules below:
+
+- Damage Resistance ::
+  You have Resistance to Bludgeoning, Piercing, and Slashing damage.
+
+- Rage Damage ::
+  When you make an attack using Strength - with either a weapon or an Unarmed
+  Strike - and deal damage to the target, you gain a bonus to the damage that
+  increases as you gain levels as a Barbarian, as shown in the Rage Damage
+  column of the Barbarian Features table.
+
+- Strength Advantage ::
+  You have advantage on Strength checks and Strength saving throws.
+
+- No Concentration on Spells ::
+  You can't maintain Concentration, and you can't cast spells.
+
+- Duration ::
+  The Rage lasts until the end of your next turn, and it ends early if you don
+  Heavy armor or have the Incapacitated condition. If your Rage is still active
+  on your next trun, you can extend the Rage for another round by doing one of
+  the following:
+
+  - Make an attack roll against an enemy.
+  - Force an enemy to make a saving throw.
+  - Take a Bonus Action to extend your Rage.
+
+  Each time the Rage is extended, it lasts until the end of your next turn. You
+  can maintain a Rage for up to 10 minutes.
+
+***** Path of Giant :subclass:path_of_giant:
+****** Giant's Havoc
+Your rages pull strength from the primal might of giants, transforming you into
+a hulking force of destruction. While raging, you gain the following benefits:
+
+- Crushing Throw ::
+  When you make a successful ranged attack with a thrown weapon using Strength,
+  you can add your Rage Damage bonus to the attack’s damage roll.
+
+- Giant Stature ::
+  Your reach increases by 5 feet, and if you are smaller than Large, you become
+  Large, along with anything you are wearing. If there isn’t enough room for you
+  to increase your size, your size doesn’t change.
+
+** Special Resources
+#+NAME: special_resouces
+| ! | Resource | Used | Total | SR | LR | Count | PB | Die | DMG |
+|---+----------+------+-------+----+----+-------+----+-----+-----|
+| # | Hit Dice |    0 |     8 | -  | X  |     8 | -  | D12 | -   |
+| # | Rage     |    0 |     3 | 1  | X  |     3 | -  | -   | 2   |
+| # | Morality |    0 |     3 | -  | -  |     3 | -  | -   | -   |
+#+TBLFM: $3='(dnd-reset-based-on-rest (dnd-get-stat "SHORT") (dnd-get-stat "LONG") $Used $SR $LR)::$4='(+ (dnd-calc-pb (dnd-get-stat "PROF") $PB) (string-to-number $Count))::@2$7='(dnd-get-stat "Lvl")::@2$9='(format "D%s" (dnd-get-stat "Hit_Die"))
+
+* Proficiencies
+| Languages | Tools         | Armor   | Weapons |
+|-----------+---------------+---------+---------|
+| Common    | Smith's Tools | Light   | Simple  |
+| Giant     |               | Medium  | Martial |
+| Dwarf     |               | Shields |         |
+
+** Tools
+
+* Equipment
+#+NAME: equipment
+| ! | Name                    |   QTY | Cost | Weight | Tot_Weight | Tot_Cost |
+|---+-------------------------+-------+------+--------+------------+----------|
+| # | Backpack                |     1 |    2 |      5 |          5 |        2 |
+| # | Bedroll                 |     1 |    1 |      7 |          7 |        1 |
+| # | Flask of Oil            |     2 |  .02 |      1 |          2 |     0.04 |
+| # | Ration                  |    10 |   .5 |      2 |         20 |       5. |
+| # | Rope                    |     1 |    1 |      5 |          5 |        1 |
+| # | Tinderbox               |     1 |   .5 |      1 |          1 |      0.5 |
+| # | Torch                   |    10 |  .01 |      1 |         10 |      0.1 |
+| # | Waterskin               |     1 |   .2 |      5 |          5 |      0.2 |
+| # | Greataxe                |     1 |   30 |      7 |          7 |       30 |
+| # | Handaxe                 |     4 |    5 |      2 |          8 |       20 |
+| # | Smith's Tools           |     1 |   20 |      8 |          8 |       20 |
+| # | Battleaxe               |     2 |   10 |      4 |          8 |       20 |
+| # | War Pick                |     1 |   10 |      2 |          2 |       10 |
+| # | Gauntlets of Ogre Power |     1 |    0 |     10 |         10 |        0 |
+|---+-------------------------+-------+------+--------+------------+----------|
+| # | Carry/Drag              | 690.0 | 1380 |      - |         98 |   109.84 |
+#+TBLFM: @>$7=vsum(@2$Tot_Cost..@>>$Tot_Cost)::@>$6=vsum(@2$Tot_Weight..@>>$Tot_Weight)::@>$5='(format "%s" "-")::@>$3='(dnd-calc-carry-capacity (dnd-get-stat "STR") (dnd-get-stat "SIZE") (dnd-get-stat "Carry_Bonus"))::@>$4='(dnd-calc-drag-capacity (dnd-get-stat "STR") (dnd-get-stat "SIZE") (dnd-get-stat "Carry_Bonus"))::$6=($QTY * $Weight)::$7=($QTY * $Cost)
+    
+** Money
+| ! | Copper | Silver | Electrum | Gold | Platinum | Total |           |
+|---+--------+--------+----------+------+----------+-------+-----------|
+| # |      0 |     10 |        0 | 1007 |        0 |  1008 | Mine      |
+|---+--------+--------+----------+------+----------+-------+-----------|
+| # |      0 |      0 |        0 |    0 |        0 |     0 | Converter |
+#+TBLFM: $7=(($Copper / 100) + ($Silver / 10) + ($Electrum / 2) + $Gold + ($Platinum * 10))
+
+* Abilities
+#+NAME: stats
+| STR | DEX | CON | INT | WIS | CHA | PROF | SHORT | LONG | SIZE   | Carry_Bonus | Hit_Die | Lvl |
+|-----+-----+-----+-----+-----+-----+------+-------+------+--------+-------------+---------+-----|
+|  23 |  20 |  18 |  10 |  13 |  10 |    3 | -     | -    | Medium |           1 |      12 |   8 |
+#+TBLFM: $8='(format "%s" "-")::$9='(format "%s" "-")

@@ -1,0 +1,338 @@
+#+STARTUP: content showstars indent
+#+OPTIONS: tags:nil
+#+TITLE: Smiles - Features
+#+FILETAGS: smiles features skill
+
+
+* Racial (Goliath)                                                  :goliath:
+- Creature Type :: Humanoid
+- Size :: Medium
+- Speed :: 35ft
+
+** Giant Ancestry
+You are descended from Giants. choose on of the following benefits a
+supernatural boon from your ancestry; you can use the chosen benefit a number of
+times equal to your Proficiency Bonus, and you regain all expended uses when you
+finish a Long Rest:
+
+- Could's Jaunt (Clound Giant) ::
+  As a Bonus Action, you magically teleport up to 30 feet to an unoccupied space
+  you can see.
+
+** Large Form
+Starting at character Level 5, you can change your size to Large as a Bonus
+Action if you're in a big enough space. This transformation lasts for 10 minutes
+or until you end it (no action required). For that duration, you have Advantage
+on Strength checks, and your Speed increases by 10 feet. Once you use this trait,
+you can't use it again until you finish a Long Rest.
+
+** Powerful Build
+You have Advantage on any saving throw you make to end the Grappled condition.
+You also count as one size larger when determining your carrying capacity.
+    
+* Class (Barbarian)                                         :barbarian:class:
+** Core
+- Primary Ability :: Strength
+- Hit Point Die :: D12 per Barbarian Level
+- Saving Throw Prof ::
+  - Strength
+  - Constitution
+- Skill Proficiencies ::
+  - Animal Handling
+  - Athletics
+  - Intimidation
+  - Nature
+  - Perception*
+  - Survival*
+
+** Feature Table                                                     :table:
+| Level | PB | Features                                | Rages | Rage Dmg | WM |
+|-------+----+-----------------------------------------+-------+----------+----|
+|     1 | +2 | Rage, Unarmored Defense, Weapon Mastery |     2 |       +2 |  2 |
+|     2 | +2 | Danger Sense, Reckless Attack           |     2 |       +2 |  2 |
+|     3 | +2 | Barbarian Subclass, Primal Knowledge    |     3 |       +2 |  2 |
+|     4 | +2 | Ability Score Improvement               |     3 |       +2 |  3 |
+|     5 | +3 | Extra Attack, Fast Movement             |     3 |       +2 |  3 |
+|     6 | +3 | Subclass feature                        |     4 |       +2 |  3 |
+|     7 | +3 | Feral Instinct, Instinctive Pounce      |     4 |       +2 |  3 |
+|     8 | +3 | Ability Score Improvement               |     4 |       +2 |  3 |
+|     9 | +4 | Brutal Strike                           |     4 |       +3 |  3 |
+|    10 | +4 | Subclass feature                        |     4 |       +3 |  4 |
+|    11 | +4 | Relentless Rage                         |     4 |       +3 |  4 |
+|    12 | +4 | Ability Score Improvement               |     4 |       +3 |  4 |
+|    13 | +5 | Improved Brutal Strike                  |     5 |       +3 |  4 |
+|    14 | +5 | Subclass feature                        |     5 |       +3 |  4 |
+|    15 | +5 | Persistent Rage                         |     5 |       +3 |  4 |
+|    16 | +5 | Ability Score Improvement               |     5 |       +4 |  4 |
+|    17 | +6 | Improved Brutal Strike                  |     6 |       +4 |  4 |
+|    18 | +6 | Indomitable Might                       |     6 |       +4 |  4 |
+|    19 | +6 | Epic Boon                               |     6 |       +4 |  4 |
+|    20 | +6 | Primal Champion                         |     6 |       +4 |  4 |
+
+** Level 1                                                           :lvl_1:
+*** Rage
+You can imbue yourself with a primal power called Rage, a force that grants you
+extraordinary mights and resilience. You can enter it as a Bonus Action if you
+aren't wearing Heavy armor.
+
+You can enter your Rage the number of times shown for your Barbarian level in
+the Rages column of the Barbarian Features table. You regain one expended use
+when you finish a Short Rest, and you regain all expended uses when you finish a
+Long Rest.
+
+While active, your Rage follows the rules below:
+
+- Damage Resistance ::
+  You have Resistance to Bludgeoning, Piercing, and Slashing damage.
+
+- Rage Damage ::
+  When you make an attack using Strength - with either a weapon or an Unarmed
+  Strike - and deal damage to the target, you gain a bonus to the damage that
+  increases as you gain levels as a Barbarian, as shown in the Rage Damage
+  column of the Barbarian Features table.
+
+- Strength Advantage ::
+  You have advantage on Strength checks and Strength saving throws.
+
+- No Concentration on Spells ::
+  You can't maintain Concentration, and you can't cast spells.
+
+- Duration ::
+  The Rage lasts until the end of your next turn, and it ends early if you don
+  Heavy armor or have the Incapacitated condition. If your Rage is still active
+  on your next trun, you can extend the Rage for another round by doing one of
+  the following:
+
+  - Make an attack roll against an enemy.
+  - Force an enemy to make a saving throw.
+  - Take a Bonus Action to extend your Rage.
+
+  Each time the Rage is extended, it lasts until the end of your next turn. You
+  can maintain a Rage for up to 10 minutes.
+
+*** Unarmored Defense
+While your aren't wearing any armor, your base Armor Class equals 10 plus your
+Dexterity and Constitution modifiers. You can use a Shield and still gain this
+benefit.
+
+*** Weapon Mastery                                         :mastery:weapon:
+Your training with weapons allows you to use the mastery properties of two kinds
+of Simple of Martial Melee weapons of your choice, such as Greataxes and
+Handaxes. Whenever you finish a Long Rest, you can practice weapon drills and
+change one of those weapon choices.
+
+When you reach certain Barbarian levels, you gain the ability to use the mastery
+properties of more kinds of weapons, as shown in the Weapon mastery column of
+the Barbarian Feature table.
+
+**** Battleaxe (Topple)                                 :topple:battleaxe:
+If you hit a creature with this weapon, you can force the creature to make a
+Constitution saving throw (DC 8 plus the ability modifier used to make the
+attack roll and your Proficiency Bonus). On a failed save, the creature has the
+Prone condition.
+
+**** Greataxe (Cleave)                                   :cleave:greataxe:
+If you hit a creature with a melee attack roll using this weapon, you can make a
+melee attack roll with the weapon against a second creature with 5 feet of the
+first that is also within your reach. On a hit, the second creature takes the
+weapon's damage, but don't add your ability modifier to that damage unless that
+modifier is negative. You can make this extra attack only once per turn.
+
+** Level 2                                                           :lvl_2:
+*** Danger Sense
+You gain an uncanny sense of when things aren't as they should be, giving you
+and edge when you dodge perils. You have Advantage on Dexterity saving throws
+unless you have the Incapacitated condition.
+
+*** Reckless Attack
+You can throw aside all concerns for defense to attack with increased ferocity.
+When you make your first attack roll on your turn, you can decide to attack
+recklessly. Doing so gives you Advantage on attack rolls using Strength until
+the start of you next turn, but attack rolls against you have Advantage during
+that time.
+
+** Level 3                                                           :lvl_3:
+*** Barbarian Subclass
+You gain a Barbarian subclass of your choice.
+
+*** Primal Knowledge
+You gain proficiency in another skill of your choice from the skill list
+available to Barbarians at level 1.
+
+In addition, while your Rage is active, you can channel primal power when you
+attempt certain tasks; whenever you make an ability check using one of the
+following skills, you can make it as a Strength check even if it normally uses a
+different ability:
+
+- Acrobatics
+- Intimidation
+- Perception
+- Stealth
+- Survival
+
+When you use this ability, your Strength represents primal power coursing
+through you, honing your agility, bearing, and senses.
+
+** Level 4                                                           :lvl_4:
+*** Ability Score Improvement
+You gain the Ability Score Improvement feat (see chapter 5) or another feat of
+your choice for which you qualify. You gain this feature again at Barbarian
+Levels 8, 12, and 16.
+
+** Level 5                                                           :lvl_5:
+*** Extra Attack
+You can attack twice instead of once whenever you take the Attack action on your
+turn.
+
+*** Fast Movement
+Your speed increases by 10 feet while you aren't wearing Heavy armor.
+
+** Level 7                                                           :lvl_7:
+*** Feral Instinct
+By 7th level, your instincts are so honed that you have advantage on initiative
+rolls.
+
+Additionally, if you are surprised at the beginning of combat and aren't
+incapacitated, you can act normally on your first turn, but only if you enter
+your rage before doing anything else on that turn.
+
+*** Instinctive Pounce
+At 7th level, as part of the bonus action you take to enter your rage, you can
+move up to half your speed.
+
+** Level 9                                                           :lvl_9:
+*** Brutal Strike
+
+** Level 11                                                         :lvl_11:
+*** Relentless Rage
+
+** Level 13                                                         :lvl_13:
+*** Improved Brutal Strike
+
+** Level 15                                                         :lvl_15:
+*** Persistent Rage
+
+** Level 17                                                         :lvl_17:
+*** Improved Brutal Strike
+
+** Level 18                                                         :lvl_18:
+*** Indomitable Might
+
+** Level 19                                                         :lvl_19:
+*** Epic Boon
+
+** Level 20                                                         :lvl_20:
+*** Primal Champion
+
+** Subclass (Path of Giant)                                       :subclass:
+*** Level 3                                                         :lvl_3:
+**** Giant's Power
+When you choose this path, you learn to speak, read, and write Giant or one
+other language of your choice if you already know Giant. Additionally, you learn
+a cantrip of your choice: either druidcraft or thaumaturgy. Wisdom is your
+spellcasting ability for this spell.
+
+**** Giant's Havoc
+Your rages pull strength from the primal might of giants, transforming you into
+a hulking force of destruction. While raging, you gain the following benefits:
+
+- Crushing Throw ::
+  When you make a successful ranged attack with a thrown weapon using Strength,
+  you can add your Rage Damage bonus to the attack’s damage roll.
+
+- Giant Stature ::
+  Your reach increases by 5 feet, and if you are smaller than Large, you become
+  Large, along with anything you are wearing. If there isn’t enough room for you
+  to increase your size, your size doesn’t change.
+
+*** Level 6                                                         :lvl_6:
+**** Elemental Cleaver
+Your bond with the elemental might of giants grows, and you learn to infuse
+weapons with primordial energy.
+
+When you enter your rage, you can choose one weapon that you are holding and
+infuse it with one of the following damage types: acid, cold, fire, thunder, or
+lightning. While you wield the infused weapon during your rage, the weapon’s
+damage type changes to the chosen type, it deals an extra 1d6 damage of the
+chosen type when it hits, and it gains the thrown property, with a normal range
+of 20 feet and a long range of 60 feet. If you throw the weapon, it reappears in
+your hand the instant after it hits or misses a target. The infused weapon’s
+benefits are suppressed while a creature other than you wields it.
+
+While raging and holding the infused weapon, you can use a bonus action to
+change the infused weapon’s current damage type to another one from the damage
+type options above.
+
+*** Level 10                                                       :lvl_10:
+**** Mighty Impel
+Your connection to giant strength allows you to hurl both allies and enemies on
+the battlefield. As a bonus action while raging, you can choose one Medium or
+smaller creature within your reach and move it to an unoccupied space you can
+see within 30 feet of yourself. An unwilling creature must succeed on a Strength
+saving throw (DC equals 8 + your proficiency bonus + your Strength modifier) to
+avoid the effect.
+
+If, at the end of this movement, the thrown creature isn’t on a surface or
+liquid that can support it, the creature falls, taking damage as normal and
+landing prone.
+
+*** Level 14                                                       :lvl_14:
+**** Demiurgic Colossus
+The primordial power of your rage intensifies. When you rage, your reach
+increases by 10 feet, your size can increase to Large or Huge (your choice), and
+you can use your Mighty Impel to move creatures that are Large or smaller.
+
+In addition, the extra damage dealt by your Elemental Cleaver feature increases
+to 2d6.
+    
+* Background (Soldier)                                   :soldier:background:
+- Ability Scores ::
+  - Strength
+  - Dexterity
+  - Constitution
+
+- Feat :: Savage Attacker
+
+- Skill Proficiencies ::
+  - Athletics
+  - Intimidation
+
+- Tool Proficiency :: One kind of Gaming Set (see chapter 6)
+
+- Equipment (Choose A or B) ::
+  - A ::
+    - Spear
+    - Shortbow
+    - 20 Arrows
+    - Gaming Set (same as above)
+    - Healer's Kit
+    - Quiver
+    - Traveler's Clothes
+    - 14 Gold
+  - B ::
+    - 50 Gold
+
+You began training for war as soon as you reached adulthood and carry precious
+few memories of life before you took up arms. Battle is in your blood. Sometimes
+you catch yourself reflexively performing the basic fighting exercises you
+learned first. Eventually, you put that training to use on the battlefield,
+protecting the realm by waging war.
+
+
+* Feats                                                                :feat:
+** Dual Wielder                                                    :general:
+- Ability Score Increase ::
+  Increase your Strength or Dexterity score by 1, to a maximum of 20.
+
+- Enhanced Dual Wielding ::
+  When you take the attack action on your turn and attack with a weapon that has
+  the Light property, you can make one extra attack as a Bonus Action later on
+  the same turn with a different weapon, which must be a melee weapon that lacks
+  the Two-handed property. You don't add your ability modifier to the extra
+  attack's damage unless that modifier is negative.
+
+- Quick Draw ::
+  You can draw or stow two weapons that lack the Two-Handed property when you
+  would normally be able to draw or stow only one.
+
+* Temporary Effects
